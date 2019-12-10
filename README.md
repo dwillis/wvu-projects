@@ -9,5 +9,7 @@ Basic scraper for the WVU campus police [crime log](https://police.wvu.edu/clery
 Use the following commands to run the script:
 
 `cd crime-log`
+
 `pip3 install -r requirements.txt`
+
 `python3 crimelog.py`
