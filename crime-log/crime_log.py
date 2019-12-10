@@ -18,7 +18,7 @@ for incident in incidents:
         outcome = incident.find_all('p')[5].text.split(": ")[1]
     results.append([id, title, year, datetime, building, address, outcome])
 
-with open("crimelog.csv", 'w') as csvfile:
+with open("crime_log.csv", 'w') as csvfile:
     writer = csv.writer(csvfile)
     writer.writerow(['id', 'title', 'year', 'datetime', 'building', 'address', 'outcome'])
     writer.writerows(results)
