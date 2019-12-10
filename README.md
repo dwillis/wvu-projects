@@ -12,4 +12,17 @@ Use the following commands to run the script:
 
 `pip3 install -r requirements.txt`
 
-`python3 crimelog.py`
+`python3 crime_log.py`
+
+
+### State Agency Reports
+
+Basic scraper for [state agency reports to the legislature](http://www.wvlegislature.gov/Reports/Agency_Reports/agencylist_all.cfm) that outputs two CSV files: one, `all_reports.csv`, is the complete list of reports from the site. The second, `new_reports.csv`, is those that have appeared since the last time the script was run.
+
+Use the following commands to run the script:
+
+`cd wv-legislature`
+
+`pip3 install -r requirements.txt`
+
+`python3 agency_reports.py`
