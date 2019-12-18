@@ -15,7 +15,7 @@ scrape_and_commit_crimelog () {
     current_time=$(date "+%Y.%m.%d-%H.%M.%S")
     mv crime_log.csv crime_log.csv.$current_time
     python crime_log.py
-    git add *.csv
+    git add .
     git commit -m "updated crimelog" && \
         git push -q https://${GITHUB_PERSONAL_TOKEN}@github.com/dwillis/wvu-projects.git master \
         || true
