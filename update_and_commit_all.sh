@@ -4,7 +4,7 @@ scrape_and_commit () {
     cd wv-legislature
     python agency_reports.py
     git add *.csv
-    git commit -F "updated reports" && \
+    git commit -m "updated reports" && \
         git push -q https://${GITHUB_PERSONAL_TOKEN}@github.com:dwillis/wvu-projects.git master \
         || true
 }
