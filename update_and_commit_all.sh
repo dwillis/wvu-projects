@@ -10,6 +10,7 @@ scrape_and_commit_reports () {
 }
 
 scrape_and_commit_crime () {
+    cd ..
     cd crime-log
     current_time=$(date "+%Y.%m.%d-%H.%M.%S")
     mv crime_log.csv crime_log.csv.$current_time
