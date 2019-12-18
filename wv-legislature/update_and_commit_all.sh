@@ -1,6 +1,7 @@
 #!/bin/bash
 
 scrape_and_commit () {
+    cd wv-legislature
     python agency_reports.py
     local csv="*.csv"
     local commit_txt="all_reports.commit.txt"
