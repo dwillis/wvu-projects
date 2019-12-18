@@ -3,10 +3,8 @@
 scrape_and_commit () {
     cd wv-legislature
     python agency_reports.py
-    local csv="*.csv"
-    local commit_txt="agency_reports_commit.txt"
-    git add $csv
-    git commit -F $commit_txt && \
+    git add *.csv
+    git commit -F "updated reports" && \
         git push -q https://${GITHUB_PERSONAL_TOKEN}@github.com:dwillis/wvu-projects.git master \
         || true
 }
