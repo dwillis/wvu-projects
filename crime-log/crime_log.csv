@@ -1881,3 +1881,4 @@ id,title,year,datetime,building,address,outcome
 ","NORTH HIGH ST / FIFE AVE, MORGANTOWN, WV 26501",Clear by Citation
 #19-03902,"TRAFFIC STOP, 1054",2019,09/20/19 01:39,"
 ","COLLEGE AVE / UNIVERSITY AVE, MORGANTOWN, WV 26501",Clear by Warning
+id,title,year,datetime,building,address,outcome
