@@ -12,8 +12,6 @@ scrape_and_commit_reports () {
 scrape_and_commit_crimelog () {
     cd ..
     cd crime-log
-    current_time=$(date "+%Y.%m.%d-%H.%M.%S")
-    mv crime_log.csv crime_log.csv.$current_time
     python crime_log.py
     git add .
     git commit -m "updated crimelog" && \

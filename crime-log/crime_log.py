@@ -2,6 +2,10 @@ import requests
 from bs4 import BeautifulSoup
 import csv
 
+with open('crime_log.csv', 'r') as existing_reports:
+    reader = csv.DictReader(existing_reports)
+    previous_ids = [x['id'] for x in reader]
+
 r = requests.get("https://police.wvu.edu/clery-act/campus-safety/crime-log")
 soup = BeautifulSoup(r.text, 'html.parser')
 results = []
@@ -18,7 +22,11 @@ for incident in incidents:
         outcome = incident.find_all('p')[5].text.split(": ")[1]
     results.append([id, title, year, datetime, building, address, outcome])
 
-with open("crime_log.csv", 'w') as csvfile:
+new_ids = [x for x in results if x[0] not in previous_ids]
+
+new_incidents = [x for x in results if x[0] in new_ids]
+
+with open("crime_log.csv", 'a') as csvfile:
     writer = csv.writer(csvfile)
     writer.writerow(['id', 'title', 'year', 'datetime', 'building', 'address', 'outcome'])
-    writer.writerows(results)
+    writer.writerows(new_incidents)
