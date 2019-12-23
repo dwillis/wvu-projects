@@ -29,4 +29,5 @@ new_incidents = [x for x in results if x[0] in new_ids]
 with open("crime_log.csv", 'a') as csvfile:
     writer = csv.writer(csvfile)
     writer.writerow(['id', 'title', 'year', 'datetime', 'building', 'address', 'outcome'])
-    writer.writerows(new_incidents)
+    if len(new_incidents):
+        writer.writerows(new_incidents)
