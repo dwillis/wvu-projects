@@ -26,8 +26,7 @@ new_ids = [x for x in results if x[0] not in previous_ids]
 
 new_incidents = [x for x in results if x[0] in new_ids]
 
-with open("crime_log.csv", 'a') as csvfile:
-    writer = csv.writer(csvfile)
-    writer.writerow(['id', 'title', 'year', 'datetime', 'building', 'address', 'outcome'])
-    if len(new_incidents):
+if len(new_incidents) > 0:
+    with open("crime_log.csv", 'a') as csvfile:
+        writer = csv.writer(csvfile)
         writer.writerows(new_incidents)
