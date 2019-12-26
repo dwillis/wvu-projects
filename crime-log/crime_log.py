@@ -22,9 +22,7 @@ for incident in incidents:
         outcome = incident.find_all('p')[5].text.split(": ")[1]
     results.append([id, title, year, datetime, building, address, outcome])
 
-new_ids = [x for x in results if x[0] not in previous_ids]
-
-new_incidents = [x for x in results if x[0] in new_ids]
+new_incidents = [x for x in results if x[0] not in previous_ids]
 
 if len(new_incidents) > 0:
     with open("crime_log.csv", 'a') as csvfile:
