@@ -19,6 +19,16 @@ scrape_and_commit_crimelog () {
         || true
 }
 
+scrape_and_commit_lobbying () {
+    cd ..
+    cd lobbying
+    python lobbying_filings.py
+    git add .
+    git commit -m "updated lobbying filings" && \
+        git push -q https://${GITHUB_PERSONAL_TOKEN}@github.com/dwillis/wvu-projects.git master \
+        || true
+}
+
 git config --global user.email "wvu_projects@example.com"
 git config --global user.name "WVU Projects"
 
