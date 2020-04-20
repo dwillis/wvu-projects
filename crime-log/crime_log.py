@@ -16,11 +16,20 @@ for incident in incidents:
     id, title = incident.find('h4').text.split(': ')
     for p in incident.find_all('p'):
         year = incident.find_all('p')[0].text
-        datetime = incident.find_all('p')[1].text.split(": ")[1]
-        building = incident.find_all('p')[3].text.split(": ")[1]
-        address = incident.find_all('p')[4].text.split(": ")[1]
-        outcome = incident.find_all('p')[5].text.split(": ")[1]
-    results.append([id, title, year, datetime, building, address, outcome])
+        keys = [x.find('strong').text.strip() for x in incident.find_all('p') if x.find('strong')]
+        if "Building:" in keys:
+            datetime = incident.find_all('p')[1].text.split(": ")[1]
+            building = incident.find_all('p')[2].text.split(": ")[1]
+            address = incident.find_all('p')[3].text.split(": ")[1]
+            outcome = incident.find_all('p')[4].text.split(": ")[1]
+        else:
+            datetime = incident.find_all('p')[1].text.split(": ")[1]
+            building = None
+            address = incident.find_all('p')[2].text.split(": ")[1]
+            outcome = incident.find_all('p')[3].text.split(": ")[1]
+        result = [id, title, year, datetime, building, address, outcome]
+        if result not in results:
+            results.append(result)
 
 new_incidents = [x for x in results if x[0] not in previous_ids]
 
