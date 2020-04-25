@@ -19,6 +19,15 @@ scrape_and_commit_crimelog () {
         || true
 }
 
+scrape_and_commit_meetings () {
+    cd meeting-notices
+    python scraper.py
+    git add *.csv
+    git commit -m "updated meeting notices" && \
+        git push -q https://${GITHUB_PERSONAL_TOKEN}@github.com/dwillis/wvu-projects.git master \
+        || true
+}
+
 scrape_and_commit_lobbying () {
     cd ..
     cd lobbying
