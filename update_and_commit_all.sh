@@ -20,6 +20,7 @@ scrape_and_commit_crimelog () {
 }
 
 scrape_and_commit_meetings () {
+    cd ..
     cd meeting-notices
     python scraper.py
     git add *.csv
@@ -43,3 +44,5 @@ git config --global user.name "WVU Projects"
 
 scrape_and_commit_reports
 scrape_and_commit_crimelog
+scrape_and_commit_meetings
+scrape_and_commit_lobbying
