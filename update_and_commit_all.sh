@@ -39,6 +39,16 @@ scrape_and_commit_lobbying () {
         || true
 }
 
+scrape_and_commit_wvu_testing () {
+    cd ..
+    cd wvu-covid-tests
+    python wvu_tests.py
+    git add .
+    git commit -m "updated wvu tests" && \
+        git push -q https://${GITHUB_PERSONAL_TOKEN}@github.com/dwillis/wvu-projects.git master \
+        || true
+}
+
 git config --global user.email "wvu_projects@example.com"
 git config --global user.name "WVU Projects"
 
@@ -46,3 +56,4 @@ scrape_and_commit_reports
 scrape_and_commit_crimelog
 scrape_and_commit_meetings
 scrape_and_commit_lobbying
+scrape_and_commit_wvu_testing
