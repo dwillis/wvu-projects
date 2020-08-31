@@ -15,7 +15,7 @@ for row in rows:
     student_results, student_positive, student_positive_pct, staff_results, staff_positive, staff_positive_pct, total_results, total_positive, total_positive_pct = [x.text for x in row.find_all('td')]
     results.append([date, student_results, student_positive, student_positive_pct, staff_results, staff_positive, staff_positive_pct, total_results, total_positive, total_positive_pct])
 
-with open('wvu_covid_testing.csv', 'w') as tests:
+with open('wvu_morgantown_covid_testing.csv', 'w') as tests:
     writer = csv.writer(tests)
     writer.writerow(['date', 'student_results', 'student_positive', 'student_positive_pct', 'staff_results', 'staff_positive', 'staff_positive_pct', 'total_results', 'total_positive', 'total_positive_pct'])
     writer.writerows(results)
