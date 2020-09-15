@@ -78,7 +78,10 @@ Since a lobbyist can list more than one employer, it seems like the proper forma
   }
   {
 		"campaign_contributions": "1050"
-	}
+	},
+  {
+    "total_expenditures": "1050"
+  }
   ]
 }
 ```
