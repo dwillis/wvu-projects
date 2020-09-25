@@ -11,22 +11,25 @@ URLS = [{'year': 2020, 'url': "FY 2020 Report by Category and Decision.pdf"}, {'
 
 HEADERS = ['year', 'categories', 'total_received', 'total_adjudicated', 'upheld', 'reversed', 'total_written', 'abandoned', 'withdrawn', 'dismissed', 'remanded', 'invalid']
 
-with open('board_of_review.csv', 'w') as f:
-    writer = csv.writer(f)
-    writer.writerow(HEADERS)
-    for report in URLS:
-        time.sleep(2)
-        year = report['year']
-        print(year)
+HEADERS_PRE_2016 = ['year', 'categories', 'total_received', 'total_adjudicated', 'upheld', 'reversed', 'total_written', 'abandoned', 'withdrawn_claimant_favor', 'withdrawn_no_change', 'dismissed', 'remanded', 'invalid']
 
-        json = tabula.read_pdf(report['url'], pages="all", output_format='json')
+for report in URLS:
+    year = report['year']
 
-        # strip out empty rows and remove the bad header
-        try:
-            rows = [r for r in json[1]['data'][2:-1] if r[0]['text'] != '']
-        except:
-            rows = [r for r in json[0]['data'][2:-1] if r[0]['text'] != '']
+    json = tabula.read_pdf(report['url'], pages="all", output_format='json')
 
+    # strip out empty rows and remove the bad header
+    try:
+        rows = [r for r in json[1]['data'][2:-1] if r[0]['text'] != '']
+    except:
+        rows = [r for r in json[0]['data'][2:-1] if r[0]['text'] != '']
+
+    with open(f'board_of_review_{year}.csv', 'w') as f:
+        writer = csv.writer(f)
+        if year > 2015:
+            writer.writerow(HEADERS)
+        else:
+            writer.writerow(HEADERS_PRE_2016)
         for row in rows:
             category = row[0]['text']
             writer.writerow([year] + [category] + [re.sub("[^[0-9]", "", str(r['text'])) for r in row[1:]])
