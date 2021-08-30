@@ -3,7 +3,7 @@ import requests
 from bs4 import BeautifulSoup
 import csv
 
-r = requests.get("https://www.wvu.edu/return-to-campus/daily-test-results/morgantown/all")
+r = requests.get("https://www.wvu.edu/return-to-campus/daily-test-results/morgantown/all#daily-campus-testing")
 html = "".join(line.strip() for line in r.text.split('\n'))
 soup = BeautifulSoup(html, 'html.parser')
 results = []
