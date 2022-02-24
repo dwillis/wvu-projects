@@ -29,17 +29,14 @@ jobs:
           python agency_reports.py
       - name: scrape crime log
         run: |
-          cd ..
           cd crime-log
           python crime_log.py
       - name: scrape meetings
         run: |
-          cd ..
           cd meeting-notices
           python scraper.py
       - name: scrape lobbying
         run: |
-          cd ..
           cd lobbying
           python lobbying_filings.py
       -
