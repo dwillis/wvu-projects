@@ -25,20 +25,16 @@ jobs:
           if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
       - name: scrape legislature reports
         run: |
-          cd wv-legislature
-          python agency_reports.py
+          cd wv-legislature && python agency_reports.py
       - name: scrape crime log
         run: |
-          cd crime-log
-          python crime_log.py
+          cd crime-log && python crime_log.py
       - name: scrape meetings
         run: |
-          cd meeting-notices
-          python scraper.py
+          cd meeting-notices && python scraper.py
       - name: scrape lobbying
         run: |
-          cd lobbying
-          python lobbying_filings.py
+          cd lobbying && python lobbying_filings.py
       -
         name: "Commit and push if it changed"
         run: |-
