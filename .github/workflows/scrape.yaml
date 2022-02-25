@@ -24,15 +24,19 @@ jobs:
           python -m pip install --upgrade pip
           if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
       - name: scrape legislature reports
+        working-directory: .
         run: |
           cd wv-legislature && python agency_reports.py
       - name: scrape crime log
+        working-directory: .
         run: |
           cd crime-log && python crime_log.py
       - name: scrape meetings
+        working-directory: .
         run: |
           cd meeting-notices && python scraper.py
       - name: scrape lobbying
+        working-directory: .
         run: |
           cd lobbying && python lobbying_filings.py
       -
