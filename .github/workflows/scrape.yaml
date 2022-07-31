@@ -48,3 +48,22 @@ jobs:
             timestamp=$(date -u)
             git commit -m "Latest data: ${timestamp}" || exit 0
             git push
+      - name: "build Datasette"
+        run: |-
+            rm wvu.db
+            sqlite-utils insert wvu.db crimelog crime-log/crime_log.csv --csv
+      - name: Heroku login credentials
+        run: |
+          cat > ~/.netrc <<EOF
+            machine api.heroku.com
+              login $HEROKU_EMAIL
+              password $HEROKU_API_KEY
+            machine git.heroku.com
+              login $HEROKU_EMAIL
+              password $HEROKU_API_KEY
+          EOF
+        env:
+          HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
+          HEROKU_EMAIL: ${{ secrets.HEROKU_EMAIL }}
+      - name: Push to Heroku
+        run: datasette publish heroku --name $HEROKU_APP_NAME wvu.db
