@@ -68,4 +68,4 @@ jobs:
       - name: Install heroku-builds plugin
         run: heroku plugins:install heroku-builds
       - name: Push to Heroku
-        run: datasette publish heroku --name $HEROKU_APP_NAME wvu.db
+        run: datasette publish heroku --name wvu-crime-log wvu.db
