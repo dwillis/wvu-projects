@@ -65,5 +65,7 @@ jobs:
         env:
           HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
           HEROKU_EMAIL: ${{ secrets.HEROKU_EMAIL }}
+      - name: Install heroku-builds plugin
+        run: heroku plugins:install heroku-builds
       - name: Push to Heroku
         run: datasette publish heroku --name $HEROKU_APP_NAME wvu.db
