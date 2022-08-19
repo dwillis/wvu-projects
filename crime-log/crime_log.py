@@ -1,6 +1,7 @@
+import csv
+from dateutil.parser import *
 import requests
 from bs4 import BeautifulSoup
-import csv
 
 with open('crime_log.csv', 'r') as existing_reports:
     reader = csv.DictReader(existing_reports)
@@ -18,12 +19,12 @@ for incident in incidents:
         year = incident.find_all('p')[0].text
         keys = [x.find('strong').text.strip() for x in incident.find_all('p') if x.find('strong')]
         if "Building:" in keys:
-            datetime = incident.find_all('p')[1].text.split(": ")[1]
+            datetime = parse(incident.find_all('p')[1].text.split(": ")[1])
             building = incident.find_all('p')[2].text.split(": ")[1]
             address = incident.find_all('p')[3].text.split(": ")[1]
             outcome = incident.find_all('p')[4].text.split(": ")[1]
         else:
-            datetime = incident.find_all('p')[1].text.split(": ")[1]
+            datetime = parse(incident.find_all('p')[1].text.split(": ")[1])
             building = None
             address = incident.find_all('p')[2].text.split(": ")[1]
             outcome = incident.find_all('p')[3].text.split(": ")[1]
