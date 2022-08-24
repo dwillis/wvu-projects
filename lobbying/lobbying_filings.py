@@ -18,11 +18,14 @@ containers = soup.find_all('p')
 for container in containers:
     links = container.find_all('a')
     for link in links:
-        url = "https://ethics.wv.gov" + link['href']
-        parts = link['href'].split('/')
-        period = parts[4]
-        name = parts[5].split('.')[0].replace(period,'').replace('%20',' ').strip()
-        results.append([name, period, url])
+        try:
+            url = "https://ethics.wv.gov" + link['href']
+            parts = link['href'].split('/')
+            period = parts[4]
+            name = parts[5].split('.')[0].replace(period,'').replace('%20',' ').strip()
+            results.append([name, period, url])
+        except:
+            continue
 
 new_filings = [x for x in results if x[2] not in previous_ids]
 
