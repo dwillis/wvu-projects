@@ -7,6 +7,9 @@ on:
     - cron: "0 12 * * *"
   workflow_dispatch:
 
+env:
+  FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
+
 jobs:
   scheduled:
     runs-on: ubuntu-latest
@@ -52,9 +55,7 @@ jobs:
         run: |-
             rm wvu.db
             sqlite-utils insert wvu.db crimelog crime-log/crime_log.csv --csv
-      - name: Fly login credentials
-        env:
-          FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
+      - name: Fly setup
         uses: superfly/flyctl-actions/setup-flyctl@master
       - name: deploy
         run: flyctl deploy --remote-only
