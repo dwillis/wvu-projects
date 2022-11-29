@@ -58,4 +58,4 @@ jobs:
       - name: Fly setup
         uses: superfly/flyctl-actions/setup-flyctl@master
       - name: deploy
-        run: flyctl deploy --remote-only
+        run: datasette publish fly wvu.db --app wvu-crime-log
