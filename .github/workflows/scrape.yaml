@@ -18,7 +18,7 @@ jobs:
           python-version: '3.x'
       -
         name: "Check out this repo"
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
@@ -52,20 +52,8 @@ jobs:
         run: |-
             rm wvu.db
             sqlite-utils insert wvu.db crimelog crime-log/crime_log.csv --csv
-      - name: Heroku login credentials
-        run: |
-          cat > ~/.netrc <<EOF
-            machine api.heroku.com
-              login $HEROKU_EMAIL
-              password $HEROKU_API_KEY
-            machine git.heroku.com
-              login $HEROKU_EMAIL
-              password $HEROKU_API_KEY
-          EOF
+      - name: Fly login credentials
         env:
-          HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
-          HEROKU_EMAIL: ${{ secrets.HEROKU_EMAIL }}
-      - name: Install heroku-builds plugin
-        run: heroku plugins:install heroku-builds
-      - name: Push to Heroku
-        run: datasette publish heroku --name wvu-crime-log wvu.db
+          FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
+        uses: superfly/flyctl-actions/setup-flyctl@master
+        run: flyctl deploy --remote-only

@@ -3,3 +3,4 @@ bs4
 dateparser
 sqlite-utils
 datasette
+datasette-publish-fly
