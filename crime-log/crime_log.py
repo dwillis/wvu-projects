@@ -7,7 +7,7 @@ with open('crime_log.csv', 'r') as existing_reports:
     reader = csv.DictReader(existing_reports)
     previous_ids = [x['id'] for x in reader]
 
-r = requests.get("https://police.wvu.edu/clery-act/campus-safety/crime-log")
+r = requests.get("https://police.wvu.edu/clery-act/crime-and-fire-log")
 soup = BeautifulSoup(r.text, 'html.parser')
 results = []
 # crime log incidents are enclosed in individual <li> elements
