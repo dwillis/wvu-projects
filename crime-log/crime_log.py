@@ -8,29 +8,28 @@ with open('crime_log.csv', 'r') as existing_reports:
     previous_ids = [x['id'] for x in reader]
 
 r = requests.get("https://police.wvu.edu/clery-act/crime-and-fire-log")
-soup = BeautifulSoup(r.text, 'html.parser')
+soup = BeautifulSoup(r.text, 'lxml')
 results = []
-# crime log incidents are enclosed in individual <li> elements
-incidents = soup.find_all('li', attrs={'class': 'incident'})
+
+incidents = soup.find('data').find_all('data')
 
 for incident in incidents:
-    id, title = incident.find('h4').text.split(': ')
-    for p in incident.find_all('p'):
-        year = incident.find_all('p')[0].text
-        keys = [x.find('strong').text.strip() for x in incident.find_all('p') if x.find('strong')]
-        if "Building:" in keys:
-            datetime = parse(incident.find_all('p')[1].text.split(": ")[1])
-            building = incident.find_all('p')[2].text.split(": ")[1]
-            address = incident.find_all('p')[3].text.split(": ")[1]
-            outcome = incident.find_all('p')[4].text.split(": ")[1]
-        else:
-            datetime = parse(incident.find_all('p')[1].text.split(": ")[1])
-            building = None
-            address = incident.find_all('p')[2].text.split(": ")[1]
-            outcome = incident.find_all('p')[3].text.split(": ")[1]
-        result = [id, title, year, datetime, building, address, outcome]
-        if result not in results:
-            results.append(result)
+    title = incident.find('incident_code').contents[0]
+    id = incident.find('case_number').contents[0]
+    datetime = parse(incident.find('incident_start_date_time').contents[0])
+    year = datetime.year
+    if len(incident.find('building_name').contents) > 0:
+        building = incident.find('building_name').contents[0]
+    else:
+        building = None
+    if len(incident.find('address').contents) > 0:
+        address = incident.find('address').contents[0]
+    else:
+        address = None
+    outcome = incident.find('disposition').contents[0]
+    result = [id, title, year, datetime, building, address, outcome]
+    if result not in results:
+        results.append(result)
 
 new_incidents = [x for x in results if x[0] not in previous_ids]
 
