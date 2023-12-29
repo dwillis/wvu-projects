@@ -28,7 +28,8 @@ with open('new_reports.csv', 'w') as csvfile:
     writer.writerow(['agency', 'title', 'year', 'url'])
     writer.writerows(new_reports)
 
-with open("all_reports.csv", 'w') as csvfile:
-    writer = csv.writer(csvfile)
-    writer.writerow(['agency', 'title', 'year', 'url'])
-    writer.writerows(results)
+if len(new_reports) > 0 :
+    with open("all_reports.csv", 'a') as csvfile:
+        writer = csv.writer(csvfile)
+        writer.writerow(['agency', 'title', 'year', 'url'])
+        writer.writerows(new_reports)
