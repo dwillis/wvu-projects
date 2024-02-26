@@ -6,7 +6,7 @@ with open('lobbying_filings.csv', 'r') as existing_reports:
     reader = csv.DictReader(existing_reports)
     previous_ids = [x['url'] for x in reader]
 
-r = requests.get("https://ethics.wv.gov/lobbyist/Pages/2021-2022-Registration-Cycle.aspx")
+r = requests.get("https://ethics.wv.gov/lobbyist/Pages/2023-2024-Registration-Cycle.aspx")
 html = "".join(line.strip() for line in r.text.split('\n'))
 soup = BeautifulSoup(html, 'html.parser')
 results = []
