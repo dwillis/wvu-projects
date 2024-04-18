@@ -16,7 +16,10 @@ incidents = soup.find('data').find_all('data')
 for incident in incidents:
     if incident.find('case_number').contents[0] == "23-03572":
         continue
-    title = incident.find('incident_code').contents[0]
+    if incident.find('incident_code').contents != []:
+        title = incident.find('incident_code').contents[0]
+    else:
+        title = incident.find('case_comments').contents[0].strip()
     id = incident.find('case_number').contents[0]
     datetime = parse(incident.find('incident_start_date_time').contents[0])
     year = datetime.year
