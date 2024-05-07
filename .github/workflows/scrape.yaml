@@ -41,7 +41,7 @@ jobs:
       - name: scrape lobbying
         working-directory: .
         run: |
-          cd lobbying && python lobbying_filings.py
+          cd lobbying && python lobbying_filings.py 2023-2024
       -
         name: "Commit and push if it changed"
         run: |-
