@@ -1,7 +1,16 @@
-requests
-bs4
-lxml
-dateparser
-sqlite-utils
-datasette
-datasette-publish-fly
+# Python 3.12+ compatible requirements for WVU Projects
+# Web scraping
+requests>=2.31.0
+beautifulsoup4>=4.12.0
+lxml>=5.0.0
+
+# Data validation and schemas
+pydantic>=2.0.0
+
+# Data processing and utilities
+dateparser>=1.2.0
+sqlite-utils>=3.35.0
+
+# Data publishing and serving
+datasette>=0.64.0
+datasette-publish-fly>=1.3.0
